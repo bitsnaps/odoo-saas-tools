@@ -34,11 +34,11 @@ class SaasServerWizard(models.TransientModel):
         super(SaasServerWizard, self).set_values()
         ICPSudo = self.env['ir.config_parameter'].sudo()
         ICPSudo.set_param("saas_server.backup_rotate_unlimited", str(int(self.backup_rotate_unlimited)))
-        ICPSudo.set_param("saas_server.backup_rotate_yearly", self.backup_rotate_yearly)
-        ICPSudo.set_param("saas_server.backup_rotate_monthly", self.backup_rotate_monthly)
-        ICPSudo.set_param("saas_server.backup_rotate_weekly", self.backup_rotate_weekly)
-        ICPSudo.set_param("saas_server.backup_rotate_daily", self.backup_rotate_daily)
-        ICPSudo.set_param("saas_server.backup_rotate_hourly", self.backup_rotate_hourly)
+        ICPSudo.set_param("saas_server.backup_rotate_yearly", int(self.backup_rotate_yearly))
+        ICPSudo.set_param("saas_server.backup_rotate_monthly", int(self.backup_rotate_monthly))
+        ICPSudo.set_param("saas_server.backup_rotate_weekly", int(self.backup_rotate_weekly))
+        ICPSudo.set_param("saas_server.backup_rotate_daily", int(self.backup_rotate_daily))
+        ICPSudo.set_param("saas_server.backup_rotate_hourly", int(self.backup_rotate_hourly))
 
     @api.model
     def get_values(self):
@@ -46,10 +46,10 @@ class SaasServerWizard(models.TransientModel):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         res.update(
             backup_rotate_unlimited=bool(int(ICPSudo.get_param('saas_server.backup_rotate_unlimited', False))),
-            backup_rotate_yearly=ICPSudo.get_param('saas_server.backup_rotate_yearly', default=2),
-            backup_rotate_monthly=ICPSudo.get_param('saas_server.backup_rotate_monthly', default=12),
-            backup_rotate_weekly=ICPSudo.get_param('saas_server.backup_rotate_weekly', default=4),
-            backup_rotate_daily=ICPSudo.get_param('saas_server.backup_rotate_daily', default=7),
-            backup_rotate_hourly=ICPSudo.get_param('saas_server.backup_rotate_hourly', default=24),
+            backup_rotate_yearly=int(ICPSudo.get_param('saas_server.backup_rotate_yearly', default=2)),
+            backup_rotate_monthly=int(ICPSudo.get_param('saas_server.backup_rotate_monthly', default=12)),
+            backup_rotate_weekly=int(ICPSudo.get_param('saas_server.backup_rotate_weekly', default=4)),
+            backup_rotate_daily=int(ICPSudo.get_param('saas_server.backup_rotate_daily', default=7)),
+            backup_rotate_hourly=int(ICPSudo.get_param('saas_server.backup_rotate_hourly', default=24)),
         )
         return res
