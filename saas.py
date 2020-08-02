@@ -122,7 +122,7 @@ def get_odoo_config():
         return res
     p = ConfigParser.RawConfigParser()
     log('Read odoo config', config_file)
-    p.read(config_file)
+    p.readfp(open(config_file))
     for (name, value) in p.items('options'):
         if value == 'True' or value == 'true':
             value = True
