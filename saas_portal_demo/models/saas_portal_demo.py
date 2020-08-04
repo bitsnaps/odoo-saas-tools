@@ -11,9 +11,9 @@ class SaasPortalServer(models.Model):
     def _get_xmlrpc_object(self, db_name):
         self.ensure_one()
 
-        url = self.local_request_scheme + '://' + self.local_host
+        url = str(self.local_request_scheme) + '://' + str(self.local_host)
         if self.local_port:
-            url += ':' + self.local_port
+            url += ':' + str(self.local_port)
         db = db_name
         username = 'admin'
         password = self.password
@@ -314,9 +314,9 @@ class SaasPortalDatabase(models.Model):
     @api.multi
     def _get_xmlrpc_object(self):
         self.ensure_one()
-        url = self.server_id.local_request_scheme + '://' + self.server_id.local_host
+        url = str(self.server_id.local_request_scheme) + '://' + str(self.server_id.local_host)
         if self.server_id.local_port:
-            url += ':' + self.server_id.local_port
+            url += ':' + str(self.server_id.local_port)
         db = self.name
         username = 'admin'
         password = self.password

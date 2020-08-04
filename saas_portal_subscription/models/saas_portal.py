@@ -65,3 +65,5 @@ class SaasPortalClient(models.Model):
                 # expiration date has been changed, flush expiration
                 # notification flag
                 record.notification_sent = False
+            else:
+                record.expiration_datetime_sent = record.expiration_datetime
